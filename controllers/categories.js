@@ -1,6 +1,6 @@
 // controllers/category.js
 // Import our Category model
-import Category from '../models/Category.js';
+import {Category} from '../db/associations.js';
  
 export const getCategory = async (req, res) => {
     try {

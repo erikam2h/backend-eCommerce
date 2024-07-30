@@ -1,16 +1,22 @@
 import express from "express";
 import cors from "cors";
+import productsRouter from "./routers/productsRouter.js";
 import { createCategory, deleteCategory, getCategory, updateCategory, getCategoryById } from "./controllers/categories.js";
-import { deleteOrder, updateOrder, createOrder, getOrderById, getOrder } from "./controllers/orders";
+import { deleteOrder, updateOrder, createOrder, getOrderById, getOrder } from "./controllers/orders.js";
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
 app.use(cors());
+app.use(express.json());
+
 
 app.get("/", (req, res) => {
   console.log("Hello World from home page");
   res.send("Hello World from home page");
 });
+
+// Products
+app.use("/products", productsRouter);
 
 //category
 app.route('/categories').get(getCategory).post(createCategory);
@@ -21,5 +27,5 @@ app.route('/orders').get(getOrder).post(createOrder);
 app.route('/orders/:id').get(getOrderById).put(updateOrder).delete(deleteOrder);
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port http://localhost:${PORT}`);
 });
