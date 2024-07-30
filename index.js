@@ -1,5 +1,6 @@
 import express from "express";
-// import cors from "cors";
+import cors from "cors";
+import productsRouter from "./routers/productsRouter.js";
 import userRoutes from "./routers/userRoutes.js";
 import {
   createCategory,
@@ -17,7 +18,6 @@ import {
 } from "./controllers/orders.js";
 
 const PORT = process.env.PORT ?? 3000;
-
 const app = express();
 
 // app.use(cors());
@@ -26,6 +26,9 @@ app.use(express.json());
 
 // User
 app.use("/users", userRoutes);
+
+// Products
+app.use("/products", productsRouter);
 
 //category
 app.route("/categories").get(getCategory).post(createCategory);
@@ -45,5 +48,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port http://localhost:${PORT}`);
 });
