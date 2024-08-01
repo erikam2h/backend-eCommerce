@@ -2,12 +2,12 @@ import { DataTypes } from "sequelize";
 import sequelize from "../db/index.js";
 
 const Order = sequelize.define("Order", {
-    id: {
+   /* id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true
-    },
+    },*/
     userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -22,6 +22,6 @@ const Order = sequelize.define("Order", {
     },
 });
 
-// Order.sync(); // This creates the table if it doesn't exist (and does nothing if it already exists)
+ //Order.sync(); // This creates the table if it doesn't exist (and does nothing if it already exists)
 
 export default Order;
