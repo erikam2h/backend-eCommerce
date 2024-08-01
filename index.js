@@ -2,20 +2,8 @@ import express from "express";
 import cors from "cors";
 import productsRouter from "./routers/productsRouter.js";
 import userRoutes from "./routers/userRoutes.js";
-import {
-  createCategory,
-  deleteCategory,
-  getCategory,
-  updateCategory,
-  getCategoryById,
-} from "./controllers/categories.js";
-import {
-  deleteOrder,
-  updateOrder,
-  createOrder,
-  getOrderById,
-  getOrder,
-} from "./controllers/orders.js";
+import categoriesRouter from "./routers/categoriesRouter.js";
+import ordersRouter from "./routers/ordersRouter.js";
 
 const PORT = process.env.PORT ?? 3000;
 const app = express();
@@ -31,16 +19,10 @@ app.use("/users", userRoutes);
 app.use("/products", productsRouter);
 
 //category
-app.route("/categories").get(getCategory).post(createCategory);
-app
-  .route("/categories/:id")
-  .get(getCategoryById)
-  .put(updateCategory)
-  .delete(deleteCategory);
-
+app.use("/categories", categoriesRouter);
 //order
-app.route("/orders").get(getOrder).post(createOrder);
-app.route("/orders/:id").get(getOrderById).put(updateOrder).delete(deleteOrder);
+app.use("/orders", ordersRouter);
+
 
 app.get("/", (req, res) => {
   console.log("Hello World from home page");
