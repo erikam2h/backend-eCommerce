@@ -5,7 +5,7 @@ import Order from '../models/Order.js';
 export const getOrder = async (req, res) => {
     try {
       const order = await Order.findAll();
-      res.json(users);
+      res.json(order);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
