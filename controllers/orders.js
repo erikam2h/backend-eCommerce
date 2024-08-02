@@ -14,10 +14,10 @@ export const getOrder = async (req, res) => {
   export const createOrder = async (req, res) => {
     try {
       const {
-        body: { userId,products, total }
+        body: { userId,products }
       } = req;
-      if (!userId || !products || !total)
-        return res.status(400).json({ error: 'userId, products, total are required' });
+      if (!userId || !products)
+        return res.status(400).json({ error: 'userId, products are required' });
       const order = await Order.create(req.body);
       res.json(order);
     } catch (error) {
@@ -41,11 +41,11 @@ export const getOrder = async (req, res) => {
   export const updateOrder = async (req, res) => {
     try {
       const {
-        body: { userId, products, total },
+        body: { userId, products },
         params: { id }
       } = req;
-      if (!userId || !products || !total)
-        return res.status(400).json({ error: 'userId, products, total are required' });
+      if (!userId || !products)
+        return res.status(400).json({ error: 'userId, products are required' });
       const order = await Order.findByPk(id);
       if (!order) return res.status(404).json({ error: 'Order not found' });
       await order.update(req.body);

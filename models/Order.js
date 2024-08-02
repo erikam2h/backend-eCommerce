@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../db/index.js";
-
+import Product from "./Product.js";
+import calculateTotal from "../middleware/calculateTotal.js";
 const Order = sequelize.define("Order", {
    /* id: {
         type: DataTypes.INTEGER,
@@ -18,10 +19,18 @@ const Order = sequelize.define("Order", {
     },
     total: {
         type: DataTypes.FLOAT,
-        allowNull: false,
+        allowNull: true,
     },
 });
 
+
+Order.beforeCreate(async (order) => {
+        order.total = await calculateTotal(order.products);
+    });
+
+Order.beforeUpdate(async (order) => {
+        order.total = await calculateTotal(order.products);
+    });
  //Order.sync(); // This creates the table if it doesn't exist (and does nothing if it already exists)
 
 export default Order;
