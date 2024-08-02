@@ -23,7 +23,7 @@ const Order = sequelize.define("Order", {
     },
 });
 
-
+//hooks
 Order.beforeCreate(async (order) => {
         order.total = await calculateTotal(order.products);
     });
